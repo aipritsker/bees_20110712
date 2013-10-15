@@ -34,8 +34,8 @@ foragingsuccess  = 0.09; % number of cells of pollen collected by a forager in 1
 s = zeros(6,agemax);
 s(1,1:3)=1;
 s(2,4:11)=1;
-s(3,12:26)=1;
-s(4,27:42)=1;
+s(3,12:20)=1;
+s(4,21:42)=1;
 s(5,43:48)=1;
 s(6,49:agemax)=1;
 % useful for nonlinearities.1=egg,2=larvae,3=pupae,4=nurse,5=house,6=forager
@@ -70,8 +70,8 @@ stage = s*Nt; % 6 stages
 survivorship = zeros(agemax,1);
 survivorship(1:3)= mt1; 
 survivorship(4:11) = mt2*( 1 - max(0,1- Pt/(a2*stage(2))));% the larval survivorship is determined by the intrinsic mortality and the food availability mainly pollen 
-survivorship(12:26)= mt3; % the brood survivorship is more static, will not affected by the food availability 
-survivorship(27:42)= mt4* ( 1 - max(0,1- Pt/(a4*stage(4))-Ht/(h4*stage(4)))); % the nurse bee survivorship depends on the intrinsic mortality and the honey +pollen availability
+survivorship(12:20)= mt3; % the brood survivorship is more static, will not affected by the food availability 
+survivorship(21:42)= mt4* ( 1 - max(0,1- Pt/(a4*stage(4))-Ht/(h4*stage(4)))); % the nurse bee survivorship depends on the intrinsic mortality and the honey +pollen availability
 % there should also be a reduction of nurse survivorship under food
 % shortages, but for the moment, we don't know what the right biology is.
 survivorship(43:48)= mt5* ( 1 - max(0,1- Ht/(h5*stage(5)))); % the house bee survivorship also depends on the honey storage 
@@ -79,9 +79,9 @@ survivorship(49:agemax,1)= (1-v)*mt6;
 
 A = (diag(1-theta,-1)+diag([0;theta]))*diag(survivorship);
 B=zeros(agemax);% the delayed development of adult bees 
-B(49,27:42)=u*ones(1,16);
+B(49,21:42)=u*ones(1,22);
 C=zeros(agemax);
-C(27,49:agemax)= v*ones(1,12); % the precicous development of adult bees 
+C(21,49:agemax)= v*ones(1,12); % the precicous development of adult bees 
 transit=A+B+C; 
 Nt1= transit*Nt; % structured dynamics for bees 
 
@@ -89,10 +89,11 @@ Nt1= transit*Nt; % structured dynamics for bees
 foodeaten =  min([Pt,a2*stage(2)+a4*stage(4)+a5*stage(5)]); % pollen consumption 
 honeyeaten= min([Ht,h2*stage(2)+h4*stage(4)+h5*stage(5)+h6*stage(6)]); % honey consumption 
 
-scavangedcells = Nt(1:26)'*(1-survivorship(1:26));% The removal of dead brood, hygenic behavior 
-vacated = Nt(26) + foodeaten+honeyeaten;% Empty Cells due to the cleaned food cells and adult emergence 
+scavangedcells = Nt(1:20)'*(1-survivorship(1:20));% The removal of dead brood, hygenic behavior 
+vacated = Nt(20) + foodeaten+honeyeaten;% Empty Cells due to the cleaned food cells and adult emergence 
 
 R = min([maxProduction,stage(4)*5,Vt+vacated+scavangedcells]);% Egg input 
+
 storedfood = min([foragingsuccess*stage(6),Vt+vacated+scavangedcells-R]);% pollen input depends on the available cells in the hive, the foraging collection efficiency of the pollen forager---assumption for pollen foraging behavior
 
 %%%%%%%Nectar Input--around 150days--field season%%%%%%%%%%%%%%%%%%%%%%
