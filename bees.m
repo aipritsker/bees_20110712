@@ -26,7 +26,7 @@ h5=0.036;
 h6=0; 
 
 %%%%%%%%%%%%%%%%%Pollen foraging Parameter (avarage value for empirical data)
-foragingsuccess  = 0.09; % number of cells of pollen collected by a forager in 1 day. Should depend on things.
+foragingsuccess  = 0.48; % number of cells of pollen collected by a forager in 1 day. Should depend on things.
 %foragingsuccess  = f(date) ?
 
 
@@ -94,6 +94,7 @@ vacated = Nt(20) + foodeaten+honeyeaten;% Empty Cells due to the cleaned food ce
 
 R = min([maxProduction,stage(4)*5,Vt+vacated+scavangedcells]);% Egg input 
 
+%this is if all foragers are foraging for pollen
 storedfood = min([foragingsuccess*stage(6),Vt+vacated+scavangedcells-R]);% pollen input depends on the available cells in the hive, the foraging collection efficiency of the pollen forager---assumption for pollen foraging behavior
 
 %%%%%%%Nectar Input--around 150days--field season%%%%%%%%%%%%%%%%%%%%%%
