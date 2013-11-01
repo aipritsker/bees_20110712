@@ -9,21 +9,19 @@ global mt1 mt2 mt3 mt4 mt5 mt6; %% mortality rate for each stage of bees
 
 %%%%%%%%%%%%pollen consumption rate for each stage of bees%%%%%%%%%%%%%%%%%%
 a1 = .0; %  a cellful of pollen weighs~~0.23g
-a2 = .005; % fraction of a cell's pollen consumed by a larva in one day
-a3 = .0;
-a4 = .028; % fraction of a cell's pollen consumed by a nurse in one da
-a5 = .002; % fraction of a cell's pollen removed by a house bee in one day
+a2 = .11; % fraction of a cell's pollen consumed by a larva in one day
+a3 = 0; %fraction of a cell of pollen consumed by pupa
+a4 = .028; % fraction of a cell's pollen consumed by a nurse in one day Rotais .028-.052
+a5 = 0; % fraction of a cell's pollen removed by a house bee in one day
 
 %%%%%%%%%honey consumption rate for each stage of bees %%%%%%%%%%%%%%%%%%%%5
-h1=0; % fraction of a cell's honey consumed by a bee in one day, a cellful of honey weighs~~0.5g
-% h2=0.02378;
-h2=0; 
+h1= 0; % fraction of a cell's honey consumed by a bee in one day, a cellful of honey weighs~~0.5g
+%Rotais
+h2=0.03; %fraction of cell consumed by larva 
 h3=0;
-% h4=0.1;
-h4=0.05; 
-h5=0.036;
-%h6=0.2286; 
-h6=0; 
+h4=0.11; %nursing bee Rotais gives range 0.085 - .11
+h5=0.036;  %storage bee
+h6=0.08; %forager bee -should be split into pollen and nectar foraging
 
 %%%%%%%%%%%%%%%%%Pollen foraging Parameter (avarage value for empirical data)
 foragingsuccess  = 0.48; % number of cells of pollen collected by a forager in 1 day. Should depend on things.
